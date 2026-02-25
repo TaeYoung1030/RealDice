@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 32557017}
   - component: {fileID: 32557016}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Mission_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 450, y: 100}
+  m_SizeDelta: {x: 550, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &32557016
 MonoBehaviour:
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBBF8\uC1581 : \uAD34\uBB3C\uB85C\uBD80\uD130 \uB3C4\uB9DD\uAC00\uAE30"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3922e25c0e5308e47a2b735add4921e2, type: 2}
   m_sharedMaterial: {fileID: 1913316305013557605, guid: 3922e25c0e5308e47a2b735add4921e2, type: 2}
@@ -206,9 +206,9 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 35
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -347,6 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6eaec562ee5a2d42846a1618b01cbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  missionPanel: {fileID: 1997668436}
+  missionImage: {fileID: 476804409}
+  missionText: {fileID: 32557016}
+  RoutineTime: 2
 --- !u!1 &152265719
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc458786eeb37d4a8ea5482185ff0d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonMission1
+  Mission1_image: {fileID: 1196078091, guid: 61257594538a6934fa7537317e849e52, type: 3}
+  Mission1_text: "\uBBF8\uC158 1  : \uAD34\uBB3C\uB85C \uBD80\uD130 \uB3C4\uB9DD\uAC00\uC138\uC694"
 --- !u!4 &183077588
 Transform:
   m_ObjectHideFlags: 0
@@ -760,12 +766,12 @@ GameObject:
   - component: {fileID: 476804410}
   - component: {fileID: 476804409}
   m_Layer: 5
-  m_Name: Mission1
+  m_Name: Mission_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &476804408
 RectTransform:
   m_ObjectHideFlags: 0
@@ -784,7 +790,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 350}
+  m_SizeDelta: {x: 650, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &476804409
 MonoBehaviour:
@@ -1612,12 +1618,12 @@ GameObject:
   - component: {fileID: 1997668439}
   - component: {fileID: 1997668438}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Mission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1997668437
 RectTransform:
   m_ObjectHideFlags: 0
