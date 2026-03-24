@@ -32,6 +32,10 @@ public class PlayerActivity : MonoBehaviour
                 }
             }          
             
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                PlayerInventory.Instance.equipItem(0);
+            }
 
         }
     
