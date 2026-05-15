@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.AdaptivePerformance.Editor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -8,10 +9,14 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("장착 설정")]
     [SerializeField] Transform handPosition;
-    private GameObject currentEquipObeject;
 
     [Header("인벤토리 데이터")]
     [SerializeField] ItemData[] slots = new ItemData[2];
+
+    private GameObject[] instItem = new GameObject[2];
+    private int currentIndex = -1;
+
+    public event Action<int, ItemData> SlotUpdate;
 
     private void Awake()
     {
@@ -25,6 +30,8 @@ public class PlayerInventory : MonoBehaviour
             if(slots[i] == null)
             {
                 slots[i] = item;
+                //업데이트 됐으니 방송 송출
+                SlotUpdate?.Invoke(i, item);
                 return true;
             }
 
@@ -34,6 +41,7 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    //키보드 키 몇 번에 저장하는지 설정
     public void equipItem(int slotIndex)
     {
         ItemData itemEquip = slots[slotIndex];
@@ -42,16 +50,30 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log($"{slotIndex + 1}번 칸이 비어있습니다");
             return;
         }
-
-        if(currentEquipObeject != null)
+        //다시 누르면 사라지게(해당 오브젝트가)
+        if(currentIndex == slotIndex)
         {
-            Destroy(currentEquipObeject);
+            instItem[slotIndex].SetActive(false);
+            currentIndex = -1;
+            return;
         }
+        if(currentIndex != -1 && instItem[currentIndex] != null)
+        {
+            instItem[currentIndex].SetActive(false);
+        }
+        //처음 해당 칸이 비워져있을때
+        if (instItem[slotIndex] == null)
+        {
+            instItem[slotIndex] = Instantiate(itemEquip.item, handPosition.position, handPosition.rotation);
 
-        currentEquipObeject = Instantiate(itemEquip.item, handPosition.position, handPosition.rotation);
+            instItem[slotIndex].transform.SetParent(handPosition);
 
-        currentEquipObeject.transform.SetParent(handPosition);
-
+        }
+        else
+        {
+            instItem[slotIndex].SetActive(true);
+        }
+        currentIndex = slotIndex;
         Debug.Log($"{itemEquip.itemName} 장착완료");
     }
 }

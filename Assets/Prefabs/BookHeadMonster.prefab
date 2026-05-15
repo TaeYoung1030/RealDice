@@ -2970,6 +2970,7 @@ GameObject:
   - component: {fileID: 2741055837582107510}
   - component: {fileID: 8984135745886590288}
   - component: {fileID: 1474597664542904104}
+  - component: {fileID: 4050936126070224567}
   m_Layer: 0
   m_Name: BookHeadMonster
   m_TagString: Untagged
@@ -3009,7 +3010,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 813bd8490a544ec46ba17659fa29e87b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -3053,6 +3054,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateManager
   monster: {fileID: 8110899547431257276}
+  chaseRange: 10
+  viewAngle: 120
+  player: {fileID: 0}
+--- !u!114 &4050936126070224567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110899547431257276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd9bd7a1d58cdf4eb60c92401eb9f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataManager
+  _enemyStats: {fileID: 11400000, guid: d1a80c910fd3e064799fc6527547b28b, type: 2}
 --- !u!1 &8131285900058876425
 GameObject:
   m_ObjectHideFlags: 0

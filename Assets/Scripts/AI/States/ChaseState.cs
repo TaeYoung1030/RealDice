@@ -1,19 +1,24 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChaseState : IEnemyState
 {
+    
+    private NavMeshAgent agent;
     public void EnterState(EnemyStateManager enemy)
     {
-        throw new System.NotImplementedException();
+        enemy.GetComponent<Animator>().SetFloat("Walk", 6f);
+        agent = enemy.GetComponent<NavMeshAgent>();
+        Debug.Log("플레이어를 쫓기 시작합니다");
     }
 
     public void ExitState(EnemyStateManager enemy)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void UpdateState(EnemyStateManager enemy)
     {
-        throw new System.NotImplementedException();
+        agent.SetDestination(enemy.player.position);
     }
 }

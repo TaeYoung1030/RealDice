@@ -7,6 +7,7 @@ public class EnemyStats : ScriptableObject
     [TextArea]
     public string EnemyDescription;
 
+    [Header("Ω∫≈»")]
     public float MaxHP;
     public float MoveSpeed;
 }

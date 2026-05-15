@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class IdleState : IEnemyState
 {
+    [SerializeField] float NextState = 1f;
+    private Animator animator;
+    float Timer;
     public void EnterState(EnemyStateManager enemy)
     {
-        Debug.Log("현재 상태 : IDLE");
+        animator = enemy.GetComponent<Animator>();
+
+        animator.SetFloat("Walk", 0f);
+        Timer = 0f;
     }
 
     public void ExitState(EnemyStateManager enemy)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void UpdateState(EnemyStateManager enemy)
     {
-        Debug.Log("상태 변환");
-    }
+        Timer += Time.deltaTime;
 
-   
+        if(Timer >= NextState)
+        {
+            //일정 시간 후에 
+            enemy.TransitionToState(new PatrolState());            
+        }
+    }  
 }

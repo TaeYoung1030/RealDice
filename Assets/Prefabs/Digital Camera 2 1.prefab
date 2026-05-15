@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 532338501264338870}
   - component: {fileID: 3791109822973791798}
   - component: {fileID: 2368107810381896819}
+  - component: {fileID: 7651256827492290819}
   - component: {fileID: 7690916234101675406}
   m_Layer: 0
   m_Name: Digital Camera 2 1
@@ -131,6 +132,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickUp
   myItem: {fileID: 11400000, guid: f6553f1e940e14c41be83c9607b9bc73, type: 2}
+--- !u!114 &7651256827492290819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266516205709990532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ee8c3b318da004a8af546e36ce2801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquipCamera
+  camDirection: {fileID: 0}
 --- !u!114 &7690916234101675406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +255,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6616380969338196962}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &1859571512622007418
 MonoBehaviour:
   m_ObjectHideFlags: 0

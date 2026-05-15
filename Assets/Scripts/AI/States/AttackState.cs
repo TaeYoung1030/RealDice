@@ -4,7 +4,7 @@ public class AttackState : IEnemyState
 {
     public void EnterState(EnemyStateManager enemy)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("현재 상태 : getup");
     }
 
     public void ExitState(EnemyStateManager enemy)
