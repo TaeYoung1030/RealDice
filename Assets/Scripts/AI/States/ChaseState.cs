@@ -19,6 +19,15 @@ public class ChaseState : IEnemyState
 
     public void UpdateState(EnemyStateManager enemy)
     {
+
+        float distance = Vector3.Distance(enemy.transform.position, enemy.player.position);
+
+        if(distance <= enemy.attackRange)
+        {
+            //몬스터가 플레이어를 잡았을때 
+            enemy.TransitionToState(new AttackState());
+            return;
+        }
         agent.SetDestination(enemy.player.position);
     }
 }

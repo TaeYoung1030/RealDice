@@ -1,18 +1,33 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
     public event Action MonsterDie;
+    public event Action PlayerFail;
+
     [SerializeField] GameObject monster;
-    [Header("½Ã¾ß ¼³Á¤")]
-    [SerializeField] public float chaseRange = 10f;
     [Range(0, 360)]
     [SerializeField] public float viewAngle = 120f;
 
-    [Header("ÀÌµ¿ ½ºÅÈ")]
+    [Header("Range")]
+    [SerializeField] public float attackRange = 2f;
+    [SerializeField] public float chaseRange = 10f;
+
+    [Header("speed")]
     [SerializeField] public float walkSpeed = 3f;
     [SerializeField] public float runSpeed = 6f;
+    [Header("Deathcamera")]
+    [SerializeField] public GameObject deathCamera;
+
+    [Header("Position")]
+    [HideInInspector] Transform monsterStartPos;
+    [HideInInspector] Transform playerStartPos;
+
+    [Header("FlashHP")]
+    [SerializeField] int maxFlashHit = 3;
+    private int currentFlashHit;
 
     [HideInInspector]
     public Transform player;
@@ -22,7 +37,15 @@ public class EnemyStateManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //ì¶”í›„ ì‚­ì œë  ë¶€ë¶„1
+        monsterStartPos = GameObject.Find("MonsterSpawnPosition").transform;
+        playerStartPos = GameObject.Find("PlayerSpawnPosition").transform;
+
+        currentFlashHit = maxFlashHit;
+
         TransitionToState(new GetUpState());
+
     }
 
     // Update is called once per frame
@@ -39,14 +62,64 @@ public class EnemyStateManager : MonoBehaviour
 
     }
 
-    //die¸Ş¼Òµå ÃßÈÄ »ç¿ëÇÏ´Â ¸Ş¼Òµå Á¦ÀÛ
 
-    private void Die()
+    public void Die()
     {
-        //¸ó½ºÅÍ°¡ Á×¾úÀ»¶§ ÇØ´ç ÀÌº¥Æ®¸¦ ±¸µ¶ÇÑ ¸ğµç °÷¿¡ Àü´Ş
         MonsterDie?.Invoke();
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 3.9f);
         
+    }
+
+    public void FailM()
+    {
+        PlayerFail?.Invoke();
+        //ResetGame();
+    }
+
+    public void TakeFlash(int damage = 1)
+    {
+        // if(currentState is DeathState || currentState is ShockState) return;
+        //ì¶”í›„ ë§¤ê°œë³€ìˆ˜ë¡œ ëª‡ ë²ˆì§¸ í•„ë¦„ì„ ì‚¬ìš©í•œ ì´¬ì˜ì¸ì§€ ì—°ê²° -> ì¼ì • íšŸìˆ˜ ì´¬ì˜ì„±ê³µì‹œ ëª¬ìŠ¤í„° ì£½ìŒ
+
+        currentFlashHit -= damage;
+        Debug.Log($"ì°°ì¹µ! ëª¬ìŠ¤í„° ì²´ë ¥: {currentFlashHit} / {maxFlashHit}");
+        if(currentFlashHit <= 0)
+        {
+            TransitionToState(new DeathState());
+        }
+        else
+        {
+            TransitionToState(new ShockState()); 
+        }
+    }
+
+    //ì¶”í›„ ì‚­ì œë  ë¶€ë¶„2
+    public void ResetGame()
+    {
+        deathCamera.SetActive(false);
+
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if(agent != null)
+        {
+            agent.Warp(monsterStartPos.position);
+        }
+        else
+        {
+            transform.position = monsterStartPos.position;
+        }
+        CharacterController cc = player.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            cc.enabled = false; 
+            player.position = playerStartPos.position; 
+            cc.enabled = true;  
+        }
+        else
+        {
+            player.position = playerStartPos.position;
+        }
+
+        TransitionToState(new GetUpState());
     }
 
 }

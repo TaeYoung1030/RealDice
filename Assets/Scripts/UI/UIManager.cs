@@ -44,4 +44,11 @@ public class UIManager : MonoBehaviour
         missionPanel.SetActive(false);
         Panel.SetActive(true);
     }
+
+    public void HideMissionUI()
+    {
+        StopAllCoroutines();
+        missionPanel.SetActive(false);
+        Panel.SetActive(false);
+    }
 }

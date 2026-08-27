@@ -15,6 +15,7 @@ public class BoardGame : MonoBehaviour, ActivityInterface
         
     }
     public KeyCode key => KeyCode.F;
+    public string actionText => "보드게임 시작";
 
     public void OnActivity()
     {       

@@ -25,6 +25,7 @@ public class RollDice : MonoBehaviour,ActivityInterface
 
     }
     public KeyCode key => KeyCode.Mouse0;
+    public string actionText => "주사위 굴리기";
     public void OnActivity()
     {
 
